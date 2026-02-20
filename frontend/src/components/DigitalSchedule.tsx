@@ -13,13 +13,19 @@ interface DigitalScheduleProps {
 
 export default function DigitalSchedule({ medicines }: DigitalScheduleProps) {
     // Flatten and sort the schedule
-    const fullSchedule = medicines.flatMap(med =>
-        (med.schedule || []).map(time => ({
+    const fullSchedule = medicines.flatMap(med => {
+        const scheduleArray = Array.isArray(med.schedule)
+            ? med.schedule
+            : typeof med.schedule === 'string'
+                ? [med.schedule]
+                : [];
+
+        return scheduleArray.map(time => ({
             time,
             medName: med.name,
             dosage: med.dosage
-        }))
-    ).sort((a, b) => a.time.localeCompare(b.time));
+        }));
+    }).filter(item => item.time && item.time.includes(":")).sort((a, b) => a.time.localeCompare(b.time));
 
     return (
         <div className="w-full p-6 space-y-6">

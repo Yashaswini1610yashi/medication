@@ -1,0 +1,528 @@
+{
+    "abbreviations": {
+        "ac": "Before meals",
+        "bid": "Twice a day",
+        "hs": "At bedtime",
+        "pc": "After meals",
+        "prn": "As needed",
+        "q": "Every",
+        "qd": "Every day",
+        "qam": "Every morning",
+        "qid": "Four times a day",
+        "stat": "Immediately",
+        "tid": "Ter in die (3x daily)",
+        "po": "By mouth (Orally)",
+        "iv": "Intravenous",
+        "im": "Intramuscular",
+        "subq": "Subcutaneous",
+        "sl": "Sublingual",
+        "top": "Topical",
+        "tab": "Tablet",
+        "cap": "Capsule",
+        "gtt": "Drop(s)",
+        "susp": "Suspension",
+        "syr": "Syrup",
+        "oint": "Ointment",
+        "sol": "Solution",
+        "ud": "As directed"
+    },
+    "drug_database": [
+        {
+            "name": "Atorvastatin",
+            "brand": "Lipitor",
+            "usage": "Cholesterol",
+            "dosages": [
+                "10mg",
+                "20mg",
+                "40mg",
+                "80mg"
+            ],
+            "restrictions": "Avoid Grapefruit"
+        },
+        {
+            "name": "Levothyroxine",
+            "brand": "Synthroid",
+            "usage": "Hypothyroidism",
+            "dosages": [
+                "25mcg",
+                "50mcg",
+                "75mcg",
+                "100mcg"
+            ],
+            "restrictions": "Take on empty stomach"
+        },
+        {
+            "name": "Lisinopril",
+            "brand": "Zestril",
+            "usage": "Blood Pressure",
+            "dosages": [
+                "5mg",
+                "10mg",
+                "20mg",
+                "40mg"
+            ],
+            "restrictions": "Monitor Potassium"
+        },
+        {
+            "name": "Metformin",
+            "brand": "Glucophage",
+            "usage": "Diabetes",
+            "dosages": [
+                "500mg",
+                "850mg",
+                "1000mg"
+            ],
+            "restrictions": "Take with meals"
+        },
+        {
+            "name": "Amlodipine",
+            "brand": "Norvasc",
+            "usage": "Blood Pressure",
+            "dosages": [
+                "2.5mg",
+                "5mg",
+                "10mg"
+            ],
+            "restrictions": "Avoid alcohol"
+        },
+        {
+            "name": "Metoprolol",
+            "brand": "Lopressor",
+            "usage": "Heart Rate",
+            "dosages": [
+                "25mg",
+                "50mg",
+                "100mg"
+            ],
+            "restrictions": "Don't stop suddenly"
+        },
+        {
+            "name": "Albuterol",
+            "brand": "Ventolin",
+            "usage": "Asthma",
+            "dosages": [
+                "90mcg inhaler"
+            ],
+            "restrictions": "Limit Caffeine"
+        },
+        {
+            "name": "Omeprazole",
+            "brand": "Prilosec",
+            "usage": "Acid Reflux",
+            "dosages": [
+                "10mg",
+                "20mg",
+                "40mg"
+            ],
+            "restrictions": "Long-term bone risk"
+        },
+        {
+            "name": "Losartan",
+            "brand": "Cozaar",
+            "usage": "Blood Pressure",
+            "dosages": [
+                "25mg",
+                "50mg",
+                "100mg"
+            ],
+            "restrictions": "Pregnancy Category D"
+        },
+        {
+            "name": "Sertraline",
+            "brand": "Zoloft",
+            "usage": "Depression",
+            "dosages": [
+                "25mg",
+                "50mg",
+                "100mg"
+            ],
+            "restrictions": "Serotonin Syndrome risk"
+        },
+        {
+            "name": "Gabapentin",
+            "brand": "Neurontin",
+            "usage": "Nerve Pain",
+            "dosages": [
+                "100mg",
+                "300mg",
+                "400mg",
+                "600mg"
+            ],
+            "restrictions": "Drowsiness"
+        },
+        {
+            "name": "Hydrochlorothiazide",
+            "brand": "Microzide",
+            "usage": "Water Retention",
+            "dosages": [
+                "12.5mg",
+                "25mg",
+                "50mg"
+            ],
+            "restrictions": "Sun sensitivity"
+        },
+        {
+            "name": "Sertraline",
+            "brand": "Zoloft",
+            "usage": "Depression",
+            "dosages": [
+                "50mg",
+                "100mg"
+            ],
+            "restrictions": "Avoid Alcohol"
+        },
+        {
+            "name": "Simvastatin",
+            "brand": "Zocor",
+            "usage": "Cholesterol",
+            "dosages": [
+                "10mg",
+                "20mg",
+                "40mg"
+            ],
+            "restrictions": "Take in evening"
+        },
+        {
+            "name": "Amoxicillin",
+            "brand": "Amoxil",
+            "usage": "Infection",
+            "dosages": [
+                "250mg",
+                "500mg",
+                "875mg"
+            ],
+            "restrictions": "Complete full course"
+        },
+        {
+            "name": "Azithromycin",
+            "brand": "Zithromax",
+            "usage": "Infection",
+            "dosages": [
+                "250mg",
+                "500mg"
+            ],
+            "restrictions": "Heart rhythm monitoring"
+        },
+        {
+            "name": "Furosemide",
+            "brand": "Lasix",
+            "usage": "Water Retention",
+            "dosages": [
+                "20mg",
+                "40mg",
+                "80mg"
+            ],
+            "restrictions": "Potassium depletion"
+        },
+        {
+            "name": "Pantoprazole",
+            "brand": "Protonix",
+            "usage": "Acid Reflux",
+            "dosages": [
+                "20mg",
+                "40mg"
+            ],
+            "restrictions": "Long-term use monitoring"
+        },
+        {
+            "name": "Escitalopram",
+            "brand": "Lexapro",
+            "usage": "Anxiety",
+            "dosages": [
+                "5mg",
+                "10mg",
+                "20mg"
+            ],
+            "restrictions": "Suicidal thought monitoring"
+        },
+        {
+            "name": "Fluoxetine",
+            "brand": "Prozac",
+            "usage": "Depression",
+            "dosages": [
+                "10mg",
+                "20mg",
+                "40mg"
+            ],
+            "restrictions": "Washout period required"
+        },
+        {
+            "name": "Rosuvastatin",
+            "brand": "Crestor",
+            "usage": "Cholesterol",
+            "dosages": [
+                "5mg",
+                "10mg",
+                "20mg",
+                "40mg"
+            ],
+            "restrictions": "Asian descent dose adjustment"
+        },
+        {
+            "name": "Bupropion",
+            "brand": "Wellbutrin",
+            "usage": "Depression",
+            "dosages": [
+                "75mg",
+                "150mg",
+                "300mg"
+            ],
+            "restrictions": "Seizure risk"
+        },
+        {
+            "name": "Trazodone",
+            "brand": "Desyrel",
+            "usage": "Insomnia",
+            "dosages": [
+                "50mg",
+                "100mg",
+                "150mg"
+            ],
+            "restrictions": "Priapism risk"
+        },
+        {
+            "name": "Alprazolam",
+            "brand": "Xanax",
+            "usage": "Anxiety",
+            "dosages": [
+                "0.25mg",
+                "0.5mg",
+                "1mg",
+                "2mg"
+            ],
+            "restrictions": "Highly addictive"
+        },
+        {
+            "name": "Clonazepam",
+            "brand": "Klonopin",
+            "usage": "Seizures/Panic",
+            "dosages": [
+                "0.5mg",
+                "1mg",
+                "2mg"
+            ],
+            "restrictions": "Taper slowly"
+        },
+        {
+            "name": "Ibuprofen",
+            "brand": "Advil",
+            "usage": "Pain/Inflammation",
+            "dosages": [
+                "200mg",
+                "400mg",
+                "600mg",
+                "800mg"
+            ],
+            "restrictions": "Stomach bleeding risk"
+        },
+        {
+            "name": "Naproxen",
+            "brand": "Aleve",
+            "usage": "Pain",
+            "dosages": [
+                "220mg",
+                "250mg",
+                "500mg"
+            ],
+            "restrictions": "Kidney risk"
+        },
+        {
+            "name": "Meloxicam",
+            "brand": "Mobic",
+            "usage": "Arthritis",
+            "dosages": [
+                "7.5mg",
+                "15mg"
+            ],
+            "restrictions": "NSAID risks"
+        },
+        {
+            "name": "Tramadol",
+            "brand": "Ultram",
+            "usage": "Moderate Pain",
+            "dosages": [
+                "50mg",
+                "100mg"
+            ],
+            "restrictions": "Seizure/Breathing risk"
+        },
+        {
+            "name": "Acetaminophen",
+            "brand": "Tylenol",
+            "usage": "Pain/Fever",
+            "dosages": [
+                "325mg",
+                "500mg",
+                "650mg"
+            ],
+            "restrictions": "Liver toxicity"
+        },
+        {
+            "name": "Montelukast",
+            "brand": "Singulair",
+            "usage": "Asthma/Allergy",
+            "dosages": [
+                "4mg",
+                "5mg",
+                "10mg"
+            ],
+            "restrictions": "Neuropsychiatric risk"
+        },
+        {
+            "name": "Fluticasone",
+            "brand": "Flonase",
+            "usage": "Allergies",
+            "dosages": [
+                "50mcg spray"
+            ],
+            "restrictions": "Nasal irritation"
+        },
+        {
+            "name": "Ciprofloxacin",
+            "brand": "Cipro",
+            "usage": "Infection",
+            "dosages": [
+                "250mg",
+                "500mg",
+                "750mg"
+            ],
+            "restrictions": "Tendon rupture risk"
+        },
+        {
+            "name": "Doxycycline",
+            "brand": "Vibramycin",
+            "usage": "Infection",
+            "dosages": [
+                "50mg",
+                "100mg"
+            ],
+            "restrictions": "Sun sensitivity, Teeth staining"
+        },
+        {
+            "name": "Clopidogrel",
+            "brand": "Plavix",
+            "usage": "Blood Thinner",
+            "dosages": [
+                "75mg",
+                "300mg"
+            ],
+            "restrictions": "Bleeding risk"
+        },
+        {
+            "name": "Apixaban",
+            "brand": "Eliquis",
+            "usage": "Blood Thinner",
+            "dosages": [
+                "2.5mg",
+                "5mg"
+            ],
+            "restrictions": "Avoid NSAIDs"
+        },
+        {
+            "name": "Warfarin",
+            "brand": "Coumadin",
+            "usage": "Blood Thinner",
+            "dosages": [
+                "1mg",
+                "2mg",
+                "5mg",
+                "10mg"
+            ],
+            "restrictions": "Vitamin K monitoring"
+        },
+        {
+            "name": "Prednisone",
+            "brand": "Deltasone",
+            "usage": "Inflammation",
+            "dosages": [
+                "1mg",
+                "5mg",
+                "10mg",
+                "20mg",
+                "50mg"
+            ],
+            "restrictions": "Immune suppression, Bone loss"
+        },
+        {
+            "name": "Cefdinir",
+            "brand": "Omnicef",
+            "usage": "Infection",
+            "dosages": [
+                "300mg"
+            ],
+            "restrictions": "Red stool (benign)"
+        },
+        {
+            "name": "Cephalexin",
+            "brand": "Keflex",
+            "usage": "Infection",
+            "dosages": [
+                "250mg",
+                "500mg"
+            ],
+            "restrictions": "Stomach upset"
+        },
+        {
+            "name": "Azithromycin",
+            "brand": "Zithromax",
+            "usage": "Infection",
+            "dosages": [
+                "250mg",
+                "500mg"
+            ],
+            "restrictions": "Heart rhythm monitoring"
+        },
+        {
+            "name": "Paracetamol",
+            "brand": "Calpol",
+            "usage": "Pain/Fever",
+            "dosages": [
+                "125mg/5ml",
+                "250mg/5ml",
+                "500mg",
+                "650mg"
+            ],
+            "restrictions": "Liver risk at high doses"
+        },
+        {
+            "name": "Levosalbutamol",
+            "brand": "Levolin",
+            "usage": "Asthma/Breathing",
+            "dosages": [
+                "0.63mg",
+                "1.25mg",
+                "1mg/5ml"
+            ],
+            "restrictions": "May cause tremors"
+        },
+        {
+            "name": "Mefenamic Acid",
+            "brand": "Meftal-P",
+            "usage": "Pain/Fever",
+            "dosages": [
+                "100mg/5ml",
+                "500mg"
+            ],
+            "restrictions": "Avoid in asthma or stomach ulcers"
+        },
+        {
+            "name": "Chlorpheniramine + Phenylephrine",
+            "brand": "Delcon",
+            "usage": "Cough/Cold/Allergy",
+            "dosages": [
+                "2mg+5mg/5ml"
+            ],
+            "restrictions": "May cause drowsiness"
+        }
+    ],
+    "handwriting_logic": {
+        "visual_patterns": {
+            "m_vs_n": "Contextualize based on following vowel; 'm' usually has 3 humps, 'n' has 2.",
+            "l_vs_i": "'l' is taller, 'i' often has a detached dot or is just a shorter vertical stroke.",
+            "o_vs_a": "'a' has a vertical tail, 'o' is a closed loop often with a connecting top whisk.",
+            "t_vs_plus": "Horizontal crossbar position determines if it's a letter or a math symbol.",
+            "r_vs_v": "Check the sharp bottom versus the rounded stroke."
+        },
+        "pharmacist_elimination": "If name is partial, cross-reference against the drug database for usage and common prefix/suffix like -cillin, -statin, -prazole."
+    }
+}

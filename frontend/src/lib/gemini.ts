@@ -4,8 +4,9 @@ const apiKey = process.env.GOOGLE_API_KEY || "AIzaSyCSBygvGm4ePoU24wLFRpPPleseqq
 const genAI = new GoogleGenerativeAI(apiKey);
 
 export const modelNames = [
-    "gemini-2.0-flash",
     "gemini-2.5-flash",
+    "gemini-2.0-flash",
+    "gemini-1.5-flash",
     "gemini-flash-latest",
     "gemini-pro-latest"
 ];

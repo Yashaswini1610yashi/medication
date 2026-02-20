@@ -155,6 +155,34 @@ export default function PrescriptionScanner({ onDataExtracted, compact }: Prescr
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <div className="mt-12 p-8 bg-zinc-50 rounded-[2rem] border border-zinc-100 space-y-6">
+                <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-100 rounded-xl">
+                        <AlertCircle className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <h3 className="text-sm font-black uppercase tracking-widest text-zinc-900">How the AI Works</h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <p className="text-xs font-bold text-zinc-900">🧠 LLM as Dataset</p>
+                        <p className="text-xs text-zinc-500 leading-relaxed font-medium">
+                            Leverages Gemini 2.5 Flash's internal medical knowledge base for validation.
+                        </p>
+                    </div>
+                    <div className="space-y-2">
+                        <p className="text-xs font-bold text-zinc-900">🖼️ Sharp Vision</p>
+                        <p className="text-xs text-zinc-500 leading-relaxed font-medium">
+                            Uses CLAHE and sharpening to make doctor handwriting readable for AI.
+                        </p>
+                    </div>
+                </div>
+
+                <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-tighter pt-4 border-t border-zinc-100">
+                    Propelled by Google Gemini 2.5 Flash • High Accuracy Extraction
+                </p>
+            </div>
         </div>
     );
 }
