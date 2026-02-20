@@ -152,6 +152,26 @@ export default function HealthResources({
                 </button>
             </div>
 
+            <div className="bg-white p-6 rounded-[2rem] border border-zinc-100 shadow-sm space-y-4">
+                <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600">
+                        <Sparkles className="w-4 h-4" />
+                    </div>
+                    <h4 className="text-xs font-bold text-zinc-900">AI Health Hub</h4>
+                </div>
+                <p className="text-[11px] text-zinc-500 leading-relaxed">
+                    Access our dedicated vision scanner and clinical resource hub for advanced medical analysis.
+                </p>
+                <a
+                    href="https://share.streamlit.io/" // Placeholder for user's Streamlit URL
+                    target="_blank"
+                    className="w-full py-2.5 bg-zinc-900 text-white rounded-xl font-bold text-[9px] uppercase tracking-widest hover:bg-zinc-800 transition-all flex items-center justify-center gap-2"
+                >
+                    Open Health Hub
+                    <ExternalLink className="w-3 h-3" />
+                </a>
+            </div>
+
             <div className="bg-white p-6 rounded-[2rem] border border-zinc-100 shadow-sm">
                 <h4 className="text-xs font-bold text-zinc-900 mb-4">Daily Wellness Tip</h4>
                 <p className="text-[11px] text-zinc-500 italic leading-relaxed">

@@ -44,6 +44,18 @@ python -m streamlit run streamlit_app.py --server.port 8502
 ```
 Visit: `http://localhost:8502`
 
+## 🌐 Production Deployment
+
+### Frontend (Dashboard) - [Vercel]
+1. Connect GitHub repo `medication`.
+2. Set Root Directory to `frontend`.
+3. Add Environment Variables: `GOOGLE_API_KEY`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`.
+
+### Backend (AI Hub) - [Streamlit Cloud]
+1. Connect repo to `share.streamlit.io`.
+2. Main file: `backend/streamlit_app.py`.
+3. Add `GOOGLE_API_KEY` to app secrets.
+
 ## 🧠 The Industrial Vision Pipeline
 1. **Preprocessing**: Grayscale → Adaptive Thresholding → Noise Reduction.
 2. **OCR Phase**: Literal character extraction from ink evidence.
