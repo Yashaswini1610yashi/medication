@@ -1,0 +1,4 @@
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+[32mForwarding HTTP traffic from https://c8e27aa0209361db-171-48-96-177.serveousercontent.com
+[0m
+Connection to serveo.net closed by remote host.

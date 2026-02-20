@@ -44,17 +44,17 @@ python -m streamlit run streamlit_app.py --server.port 8502
 ```
 Visit: `http://localhost:8502`
 
-## 🌐 Production Deployment
+## 🌐 Professional Cloud Deployment (24/7 Live)
 
-### Frontend (Dashboard) - [Vercel]
-1. Connect GitHub repo `medication`.
-2. Set Root Directory to `frontend`.
-3. Add Environment Variables: `GOOGLE_API_KEY`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`.
+To make this app work **forever**, even when your PC is turned off, click these buttons to connect your GitHub code to the cloud:
 
-### Backend (AI Hub) - [Streamlit Cloud]
-1. Connect repo to `share.streamlit.io`.
-2. Main file: `backend/streamlit_app.py`.
-3. Add `GOOGLE_API_KEY` to app secrets.
+### 1. Frontend (Dashboard)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FYashaswini1610yashi%2Fmedication&root-directory=frontend)
+*   **Settings**: Add `GOOGLE_API_KEY` and `NEXTAUTH_SECRET` in the "Environment Variables" step.
+
+### 2. Backend (AI Hub)
+[![Deploy to Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/deploy?repository=Yashaswini1610yashi/medication&branch=main&main_module_path=backend/streamlit_app.py)
+*   **Settings**: Add your `GOOGLE_API_KEY` to the App Secrets.
 
 ## 🧠 The Industrial Vision Pipeline
 1. **Preprocessing**: Grayscale → Adaptive Thresholding → Noise Reduction.
