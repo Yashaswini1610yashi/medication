@@ -5,6 +5,7 @@ import { Send, Loader2, Bot, User, Paperclip, Mic, FileText, Image as ImageIcon,
 import { motion, AnimatePresence } from "framer-motion";
 import VoiceRecorder from "./VoiceRecorder";
 import PrescriptionScanner from "./PrescriptionScanner";
+import medicalKnowledge from "@/lib/medical_knowledge.json";
 
 interface Message {
     role: "bot" | "user";

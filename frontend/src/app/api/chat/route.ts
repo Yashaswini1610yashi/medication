@@ -36,22 +36,13 @@ export async function POST(req: Request) {
       - ABBREVIATIONS: ${JSON.stringify(medicalKnowledge.abbreviations)}
       - FULL DRUG DATABASE: ${JSON.stringify(medicalKnowledge.drug_database)}
       
-      MISSION: Provide "Bits of Information" in a conversational markdown format.
+      MISSION: Provide BRIEF and FRIENDLY responses. Identify if the user is asking about a specific medication.
       
       STRICT GUIDELINES:
-      1. DO NOT return raw JSON like {"response": "..."}. ONLY return clean Markdown text.
-      2. BE CONVERSATIONAL: Start with a friendly summary, then provide details in bits.
-      3. REQUIRED SECTIONS (Use Markdown Headers) for EVERY drug mentioned:
-         - ### 💊 Drug Information
-           (Brand Name, Chemical Purpose, Pharmacological Type)
-         - ### 🩺 Health Analysis
-           (Analyze based on the patient's Age (${userInfo?.age || "N/A"}) and specific conditions)
-         - ### 🥗 Nutrients & Diet
-           (EXACT details from the 'diet' field in the knowledge base)
-         - ### 🏠 Home Remedies
-           (EXACT details from the 'home_remedies' field in the knowledge base)
+      1. BE CONCISE: Stick to 2-3 sentences max for the initial response.
+      2. REFER TO SIDEBAR: Instead of listing all details, mention that the full 💊 Drug Info, 🥗 Diet, and 🏠 Home Remedies are available in the "Live Analysis" sidebar on the right.
+      3. ACCURACY: Still use the database to identify the drug precisely.
       4. DISCLOSURE: End with a standard clinical disclaimer.
-      5. ACCURACY: If the drug is recognized (e.g., "Nimcet", "Omes P"), use the specific Diet/Remedy info from the database provided.
       
       User Message: ${message}
       

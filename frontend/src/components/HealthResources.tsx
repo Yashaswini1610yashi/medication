@@ -81,9 +81,26 @@ export default function HealthResources({
                                 </div>
                             </div>
 
+                            <div className="grid grid-cols-2 gap-2">
+                                <button
+                                    onClick={onDrugInfoClick}
+                                    className="py-2.5 bg-zinc-900 text-white rounded-xl font-bold text-[9px] uppercase tracking-widest hover:bg-zinc-800 transition-all flex items-center justify-center gap-1"
+                                >
+                                    <Info className="w-3 h-3" />
+                                    Details
+                                </button>
+                                <button
+                                    onClick={onDietClick}
+                                    className="py-2.5 bg-green-600 text-white rounded-xl font-bold text-[9px] uppercase tracking-widest hover:bg-green-700 transition-all flex items-center justify-center gap-1"
+                                >
+                                    <Apple className="w-3 h-3" />
+                                    Diet
+                                </button>
+                            </div>
+
                             <button
                                 onClick={onDrugInfoClick}
-                                className="w-full py-3 bg-zinc-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 transition-all flex items-center justify-center gap-2"
+                                className="w-full py-3 bg-zinc-100 text-zinc-600 rounded-xl font-bold text-[9px] uppercase tracking-widest hover:bg-zinc-200 transition-all flex items-center justify-center gap-2"
                             >
                                 Full Analysis Report
                                 <ChevronRight className="w-3 h-3" />

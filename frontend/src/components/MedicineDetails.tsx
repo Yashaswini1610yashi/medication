@@ -1,4 +1,4 @@
-import { Pill, AlertCircle, Info, Clock, AlertTriangle, UserRound, BookOpen, ShieldCheck, FileText } from "lucide-react";
+import { Pill, AlertCircle, Info, Clock, AlertTriangle, UserRound, BookOpen, ShieldCheck, FileText, Apple } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface Medicine {
@@ -18,6 +18,8 @@ interface Medicine {
     isSafe?: boolean;
     dosageWarning?: string;
     genericName?: string;
+    dietaryPlan?: string;
+    homeRemedies?: string;
 }
 
 interface MedicineDetailsProps {
@@ -140,6 +142,28 @@ export default function MedicineDetails({ medicines }: MedicineDetailsProps) {
                                 </div>
                                 <p className="text-sm text-red-800/80 leading-relaxed">
                                     {med.restrictions}
+                                </p>
+                            </div>
+
+                            {/* Dietary Advice */}
+                            <div className="bg-green-50/30 rounded-3xl p-6 border border-green-100/50 space-y-3">
+                                <div className="flex items-center gap-2 text-green-900 font-bold">
+                                    <Apple className="w-5 h-5 text-green-600" />
+                                    <h4>Dietary Advice</h4>
+                                </div>
+                                <p className="text-sm text-green-800/80 leading-relaxed italic">
+                                    "{med.dietaryPlan || "No specific dietary restrictions."}"
+                                </p>
+                            </div>
+
+                            {/* Home Remedies */}
+                            <div className="bg-amber-50/30 rounded-3xl p-6 border border-amber-100/50 space-y-3">
+                                <div className="flex items-center gap-2 text-amber-900 font-bold">
+                                    <ShieldCheck className="w-5 h-5 text-amber-600" />
+                                    <h4>Home Remedies</h4>
+                                </div>
+                                <p className="text-sm text-amber-800/80 leading-relaxed italic">
+                                    "{med.homeRemedies || "Gentle rest recommended."}"
                                 </p>
                             </div>
                         </div>
