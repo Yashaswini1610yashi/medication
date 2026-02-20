@@ -163,7 +163,7 @@ export default function HealthResources({
                     Access our dedicated vision scanner and clinical resource hub for advanced medical analysis.
                 </p>
                 <a
-                    href="https://share.streamlit.io/" // Placeholder for user's Streamlit URL
+                    href={process.env.NEXT_PUBLIC_STREAMLIT_URL || "https://share.streamlit.io/"}
                     target="_blank"
                     className="w-full py-2.5 bg-zinc-900 text-white rounded-xl font-bold text-[9px] uppercase tracking-widest hover:bg-zinc-800 transition-all flex items-center justify-center gap-2"
                 >
