@@ -1,4 +1,4 @@
-import { Pill, AlertCircle, Info, Clock, AlertTriangle, UserRound, BookOpen } from "lucide-react";
+import { Pill, AlertCircle, Info, Clock, AlertTriangle, UserRound, BookOpen, ShieldCheck, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface Medicine {
@@ -12,6 +12,12 @@ interface Medicine {
     restrictions: string;
     ageDosage: string;
     schedule: string[];
+    raw_ocr?: string;
+    confidence?: number;
+    fdaVerified?: boolean;
+    isSafe?: boolean;
+    dosageWarning?: string;
+    genericName?: string;
 }
 
 interface MedicineDetailsProps {
@@ -35,15 +41,30 @@ export default function MedicineDetails({ medicines }: MedicineDetailsProps) {
                     </div>
 
                     <div className="space-y-8 relative z-10">
-                        {/* Header Section */}
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div className="space-y-2">
                                 <div className="flex items-center gap-3">
                                     <h3 className="text-3xl font-bold text-zinc-900 tracking-tight">{med.name}</h3>
-                                    <span className="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest rounded-full border border-blue-100">
-                                        Verified
-                                    </span>
+                                    {med.fdaVerified ? (
+                                        <span className="px-3 py-1 bg-green-50 text-green-600 text-[10px] font-black uppercase tracking-widest rounded-full border border-green-100 flex items-center gap-1.5">
+                                            <ShieldCheck className="w-3 h-3" />
+                                            FDA Verified
+                                        </span>
+                                    ) : (
+                                        <span className="px-3 py-1 bg-zinc-50 text-zinc-400 text-[10px] font-bold uppercase tracking-widest rounded-full border border-zinc-100">
+                                            AI Identified
+                                        </span>
+                                    )}
+                                    {med.isSafe === false && (
+                                        <span className="px-3 py-1 bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-widest rounded-full border border-red-100 flex items-center gap-1.5 animate-pulse">
+                                            <AlertTriangle className="w-3 h-3" />
+                                            Dosage High
+                                        </span>
+                                    )}
                                 </div>
+                                {med.genericName && (
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Generic: {med.genericName}</p>
+                                )}
                                 <p className="text-zinc-500 text-lg font-medium">{med.explanation}</p>
                             </div>
                             <div className="flex gap-2">
@@ -57,6 +78,39 @@ export default function MedicineDetails({ medicines }: MedicineDetailsProps) {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Raw Visual Evidence (Literal Transcription) */}
+                        {med.raw_ocr && (
+                            <div className="mb-8 p-6 bg-zinc-900 rounded-[2rem] border border-zinc-800 shadow-2xl overflow-hidden relative group">
+                                <div className="absolute top-0 right-0 p-4 opacity-10">
+                                    <FileText className="w-24 h-24" />
+                                </div>
+                                <div className="relative space-y-3">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-2 text-zinc-400">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                                            <span className="text-[10px] font-black uppercase tracking-[0.2em]">Verified Visual Evidence</span>
+                                        </div>
+                                        {med.confidence !== undefined && (
+                                            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700">
+                                                <div className={`w-1.5 h-1.5 rounded-full ${med.confidence > 85 ? 'bg-emerald-500' : med.confidence > 70 ? 'bg-orange-500' : 'bg-red-500'}`} />
+                                                <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-tighter">
+                                                    Match: {med.confidence}%
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="space-y-1">
+                                        <p className="text-3xl font-mono text-white tracking-widest leading-none drop-shadow-sm">
+                                            {med.raw_ocr}
+                                        </p>
+                                        <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-tight">
+                                            Literal characters decoded from ink evidence
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Content Grid */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -89,6 +143,18 @@ export default function MedicineDetails({ medicines }: MedicineDetailsProps) {
                                 </p>
                             </div>
                         </div>
+
+                        {/* Phase 2: Dosage Warning Alert */}
+                        {med.isSafe === false && med.dosageWarning && (
+                            <div className="p-6 bg-red-600 rounded-3xl text-white shadow-xl shadow-red-200 border-4 border-white flex items-start gap-4">
+                                <AlertTriangle className="w-6 h-6 shrink-0 mt-1" />
+                                <div className="space-y-1">
+                                    <h5 className="font-black uppercase tracking-widest text-xs">Critical Dosage Alert</h5>
+                                    <p className="text-sm font-bold leading-relaxed">{med.dosageWarning}</p>
+                                    <p className="text-[10px] opacity-80 pt-2 font-medium">Please re-scan the prescription or contact your doctor to verify the "mg" dosage before administration.</p>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Age-Based Dosage Footer */}
                         <div className="pt-6 border-t border-zinc-100 flex flex-col md:flex-row md:items-start gap-4">

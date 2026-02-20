@@ -1,13 +1,19 @@
-import { PrismaClient } from "@prisma/client";
-
 const globalForPrisma = globalThis as unknown as {
-    prisma: PrismaClient | undefined;
+    prisma: any;
 };
 
-export const prisma =
-    globalForPrisma.prisma ??
-    new PrismaClient({
-        log: ["error"],
-    });
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+export const getPrisma = async () => {
+    if (!globalForPrisma.prisma) {
+        // Dynamic import to avoid top-level binary load crash in Turbopack
+        const { PrismaClient } = await import("@prisma/client");
+        globalForPrisma.prisma = new PrismaClient({
+            datasources: {
+                db: {
+                    url: "file:C:/Users/yy291/.gemini/antigravity/scratch/med-scan/frontend/prisma/dev.db",
+                },
+            },
+            log: ["error"],
+        });
+    }
+    return globalForPrisma.prisma;
+};

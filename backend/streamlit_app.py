@@ -2,10 +2,35 @@ import streamlit as st
 import google.generativeai as genai
 from PIL import Image, ImageOps, ImageEnhance
 import os
+import cv2
+import numpy as np
+import json
+from fuzzywuzzy import process
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv(".env.local")
+
+def preprocess_image_for_ocr(pil_image):
+    """Industry-standard preprocessing to improve handwriting visibility."""
+    # Convert PIL to OpenCV format
+    img = cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
+    
+    # Convert to grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    # Noise removal
+    denoised = cv2.fastNlMeansDenoising(gray, h=10)
+    
+    # Contrast enhancement (CLAHE)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    enhanced = clahe.apply(denoised)
+    
+    # Adaptive Thresholding for crisp text
+    thresh = cv2.adaptiveThreshold(enhanced, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+    
+    # Return as PIL image for Gemini
+    return Image.fromarray(thresh)
 
 # Configure Google Gemini
 API_KEY = os.getenv("GOOGLE_API_KEY") or "AIzaSyCSBygvGm4ePoU24wLFRpPPleseqqnGsXI"
@@ -19,12 +44,19 @@ genai.configure(api_key=API_KEY)
 # Function to get Gemini response
 def get_gemini_response(prompt, image=None):
     # Try high-performance models first
-    model_names = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash']
+    model_names = ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.0-flash', 'gemini-flash-latest']
     last_error = None
+    
+    # Deterministic configuration for high-precision extraction
+    generation_config = {
+        "temperature": 0.1,
+        "top_p": 1.0,
+        "max_output_tokens": 2048,
+    }
     
     for m_name in model_names:
         try:
-            model = genai.GenerativeModel(m_name)
+            model = genai.GenerativeModel(m_name, generation_config=generation_config)
             if image:
                 response = model.generate_content([prompt, image])
             else:
@@ -98,8 +130,8 @@ elif selected == "Prescription Scanner":
         do_preprocess = st.checkbox("Apply AI Image Enhancement (Recommended for handwriting)", value=True)
         
         if do_preprocess:
-            display_image = preprocess_image(image)
-            st.image(display_image, caption="Enhanced Image (Grayscale + Sharpened)", use_column_width=True)
+            display_image = preprocess_image_for_ocr(image)
+            st.image(display_image, caption="Industry-Standard Enhanced Image (Grayscale + Adaptive Threshold)", use_column_width=True)
         else:
             display_image = image
             st.image(display_image, caption="Original Image", use_column_width=True)
@@ -108,46 +140,49 @@ elif selected == "Prescription Scanner":
             with st.spinner("Analyzing with 100% Accuracy Goal..."):
                 import json
                 try:
-                    with open("../frontend/src/lib/medical_knowledge.json", "r") as f:
+                    kb_path = os.path.join("..", "frontend", "src", "lib", "medical_knowledge.json")
+                    if not os.path.exists(kb_path):
+                         kb_path = os.path.join("..", "src", "lib", "medical_knowledge.json") # Fallback
+                         
+                    with open(kb_path, "r") as f:
                         kb = json.load(f)
-                    kb_context = f"\nMEDICAL KNOWLEDGE BASE:\n- DRUGS: {', '.join(kb['common_drugs'])}\n- ABBREVIATIONS: {json.dumps(kb['abbreviations'])}"
-                except:
-                    kb_context = ""
+                    # Correcting keys to match the actual JSON structure
+                    drugs_list = [d['name'] for d in kb.get('drug_database', [])]
+                    kb_context = f"\nMEDICAL KNOWLEDGE BASE:\n- DRUGS: {', '.join(drugs_list)}\n- ABBREVIATIONS: {json.dumps(kb.get('abbreviations', {}))}"
+                except Exception as e:
+                    kb_context = f"\n(Knowledge Base Error: {str(e)})"
 
                 prompt = f"""
-                You are an elite Pharmacist and Handwriting specialist. 
-                Your goal is 100% accurate extraction. DO NOT use [UNREADABLE].
-                Use the Master Dataset to "Best Guess" even partial words.
+                ACT AS: A Clinical Pharmacist & Senior Forensic Handwriting Analyst.
+                ROLE: You are the final safety checkpoint between a doctor's messy script and a patient's health.
                 
-                ===== HANDWRITING HEURISTICS =====
-                - "Syp" = Syrup, "Tab" = Tablet, "Cap" = Capsule.
-                - If you see "Cal...", "Del...", "Lev...", or "Mef...", these are common pediatric brands (Calpol, Delcon, Levolin, Meftal).
-                - Frequency: TDS = 3x Daily, BD = 2x Daily, Q6H = Every 6 hours, SOS = Only when needed.
-
-                ===== MASTER DATASET =====
+                MISSION: Extract medications from the ATTACHED IMAGE using the "Industrial Accuracy Pipeline."
+                
+                INDUSTRY ALGORITHM:
+                1. PREPROCESSING: Image has been Thresholded and Noise-Reduced for clarity.
+                2. OCR PHASE: Record the literal visual characters (e.g., "D0l0", "C0fsil").
+                3. NLP CORRECTION: Use the Master Dataset to resolve visual errors to the correct drug name.
+                4. CLINICAL VALIDATION: Verify if the dosage/usage matches the identified drug.
+                
+                STRICT RULES:
+                - CONFIDENCE: If you are internally certain of a drug brand (like "Amphogel" or "Belladonna") even if it is NOT in the Master Dataset, you MUST provide the standardized name. DO NOT use [UNRESOLVED] unless it is truly illegible.
+                
+                ===== MASTER DATASET (Ground Truth) =====
                 {json.dumps(kb, indent=2)}
 
-                TASK:
-                1. Identify all medications. If messy, use letters visible + dosage (+ e.g. 250/5) to cross-check.
-                2. If "4ml" and "250/5" are present, calculate that it is 200mg.
-                3. Always output the Brand Name and the Generic Name together.
-                
-                Identify for each:
-                1. **Medication Name**: Standardized clinical name.
-                2. **Dosage/Strength**: e.g., 500mg, 1 tablet.
-                3. **Frequency & Timing**: e.g., BID (Twice daily), Before breakfast.
-                4. **Duration**: How many days or weeks.
-                5. **Purpose**: What it treats.
-                6. **Safety Warnings**: Critical flags for the patient.
+                FOR EACH MEDICATION FOUND:
+                1. **Medication Name**: Resolved Name (e.g. Dolo 650).
+                2. **Literal Transcription**: What was actually written (e.g. "D0l0").
+                3. **Confidence Level**: 0-100% score based on visual match.
+                4. **Drug Information**: Brand Name, Purpose, and Chemical Type.
+                5. **Health Analysis**: Personal safety assessment.
+                6. **🥗 Nutrients & Diet**: EXACT details from the 'diet' field in the Master Dataset.
+                7. **🏠 Home Remedies**: EXACT details from the 'home_remedies' field in the Master Dataset.
+                8. **Frequency & Timing**: Schedule (e.g. 1-0-1).
+                9. **Pharmacist's Note**: Summary of purpose and safety warnings.
 
-                Example Extraction:
-                If image shows "Pcm 500mg 1-0-1", extract as:
-                **Name**: Paracetamol
-                **Dosage**: 500mg
-                **Frequency**: Twice a day (Morning and Night)
-
-                If any part is unclear, mark it as [UNREADABLE].
-                Format the output clearly using bold headers and bullet points.
+                CRITICAL: If a word is unreadable after two-pass analysis, mark as [UNREADABLE]. DO NOT HALLUCINATE.
+                Format the output using professional clinical markdown headers and bullet points.
                 """
                 response = get_gemini_response(prompt, display_image)
                 st.success("Analysis Complete")

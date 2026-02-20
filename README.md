@@ -1,45 +1,60 @@
-# CareScan AI 🏥
+# CareScan AI: Industrial Prescription Digitalizer 🏥
 
-CareScan AI is a full-stack, AI-powered healthcare application designed to digitalize handwritten prescriptions and provide comprehensive medication insights. It leverages the latest Vision-LLM technology (Gemini 2.5) to bridge the gap between doctor notes and patient understanding.
+CareScan AI is a professional healthcare platform that leverages **Gemini 2.5 Flash** and advanced image preprocessing to bridge the gap between handwritten prescriptions and patient safety.
 
-## 🌟 Key Features
+## 📁 Project Structure
 
-- **Prescription OCR & Enhancement**: Advanced image processing (Sharp) for reading handwriting.
-- **Manual Medicine Lookup**: Instant search for detailed medicine data without needing a scan.
-- **Side Effect Analysis**: Automatic extraction of potential reactions.
-- **Safety Warnings**: Critical flags for Heart Disease, Diabetes, and Pregnancy.
-- **Age-Based Dosage**: Tailored dosage recommendations for Children, Adults, and the Elderly.
-- **Digital Schedule**: Precise medication timing based on prescription frequency.
+The project is segregated into two core modules for maximum scalability and maintainability:
 
-## 🧠 The "Dataset" (Google Gemini)
+```bash
+med-scan/
+├── frontend/             # Next.js Dashboard (React, Tailwind, Prisma, SQLite)
+│   ├── src/              # Application logic and UI components
+│   ├── prisma/           # Database schema and local medical records
+│   └── package.json      # Frontend dependencies
+├── backend/              # AI Health Hub (Python, Streamlit, OpenCV)
+│   ├── streamlit_app.py  # AI Health Scanner & Resource Hub
+│   └── requirements.txt  # Python dependencies (Gemini, OpenCV, FuzzyWuzzy)
+└── README.md             # This master architecture guide
+```
 
-The application leverages the internal knowledge of **Google Gemini 2.5 Flash** as its core intelligence source. It does not rely on static local CSVs or JSONs for medical data, but instead uses the LLM's vast training on medical literature and handwriting.
+## 🚀 Getting Started
 
-- **Handwriting Recognition**: Gemini processes uploaded prescription images directly using its native vision capabilities.
-- **Medical Validation**: The AI is programmed through specialized prompts to act as a "world-class pharmacist," cross-checking spellings, dosages, side effects, and precautions against its internal knowledge.
+### 1. Requirements
+- Node.js 18+
+- Python 3.9+
+- Google Gemini API Key
 
-## 🖼️ Image Preprocessing (Powering the Input)
+### 2. Setup Frontend (Dashboard)
+```bash
+cd frontend
+npm install
+# Configure .env.local with GOOGLE_API_KEY
+npx prisma db push
+npm run dev
+```
+Visit: `http://localhost:3000`
 
-To maximize accuracy, the application uses the **Sharp** library to enhance "readability" on the fly:
-- **Grayscale Conversion**: Removes color noise.
-- **Sharpening**: Enhances edges of handwriting.
-- **CLAHE**: Improves contrast for faint or faded prescriptions.
-- **Normalization**: Ensures consistent brightness for the AI.
+### 3. Setup Backend (AI Health Hub)
+```bash
+cd backend
+pip install -r requirements.txt
+# Configure .env with GOOGLE_API_KEY
+python -m streamlit run streamlit_app.py --server.port 8502
+```
+Visit: `http://localhost:8502`
 
-## 👤 Local Data & History (Personalization)
+## 🧠 The Industrial Vision Pipeline
+1. **Preprocessing**: Grayscale → Adaptive Thresholding → Noise Reduction.
+2. **OCR Phase**: Literal character extraction from ink evidence.
+3. **NLP Correction**: Fuzzy matching against the `medical_knowledge.json` master dataset.
+4. **Clinical Validation**: Cross-referencing identified drugs with patient history and safety rules.
 
-While medical knowledge is external, user context is stored locally for personalized insights:
-- **Database**: Uses Prisma (configured for local SQLite/PostgreSQL).
-- **Context**: Retrieves patient age and medical conditions to provide specifically tailored safety warnings.
-- **History Tracking**: Every processed prescription is saved to the local database for timeline tracking.
-
-## 🏗️ Tech Stack
-- **Framework**: Next.js 16 (Turbopack)
-- **AI**: Google Gemini 2.5 Flash
-- **Image Processing**: Sharp (CLAHE, Sharpening, Grayscaling)
-- **Styling**: Tailwind CSS & Framer Motion
-- **Database**: Prisma with SQLite (Local) / Support for PostgreSQL
-- **Icons**: Lucide React
+## 🛠️ Tech Stack
+- **Dashboard**: Next.js 16 (Turbopack), Framer Motion, Lucide.
+- **AI Backend**: Streamlit, Google Generative AI (Gemini Flash/Pro).
+- **Core Intelligence**: OpenCV, Python-Levenshtein, Sharp.
+- **Data Persistence**: Prisma ORM with local SQLite.
 
 ---
 *Disclaimer: This tool is for informational purposes only. Always consult a healthcare professional before starting or stopping any medication.*

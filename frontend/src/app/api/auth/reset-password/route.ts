@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import bcrypt from "bcrypt";
+import { getPrisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
     try {
@@ -10,6 +10,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Token and new password are required" }, { status: 400 });
         }
 
+        const prisma = await getPrisma();
         const user = await prisma.user.findFirst({
             where: {
                 resetToken: token,

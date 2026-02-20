@@ -5,8 +5,8 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 export const modelNames = [
     "gemini-2.5-flash",
+    "gemini-2.5-pro",
     "gemini-2.0-flash",
-    "gemini-1.5-flash",
     "gemini-flash-latest",
     "gemini-pro-latest"
 ];
@@ -20,6 +20,8 @@ export async function processWithGemini(prompt: string, imageBase64?: string, au
                 model: modelName,
                 generationConfig: {
                     responseMimeType: "application/json",
+                    temperature: 0.1,
+                    topP: 1.0,
                 }
             });
             const content: any[] = [prompt];

@@ -46,7 +46,35 @@ export default function ChatBot({ onResultsFound }: { onResultsFound?: (data: an
             if (!response.ok) throw new Error("Failed to chat");
 
             const data = await response.json();
-            setMessages((prev) => [...prev, { role: "bot", content: data.reply }]);
+            const botReply = data.reply;
+            setMessages((prev) => [...prev, { role: "bot", content: botReply }]);
+
+            // Sidebar Integration: Automatically detect mentioned drugs
+            if (onResultsFound) {
+                const drugsInKB = medicalKnowledge.drug_database;
+                const lowerReply = botReply.toLowerCase();
+
+                // Find the first drug mentioned in the reply
+                const foundDrug = drugsInKB.find(d =>
+                    lowerReply.includes(d.name.toLowerCase()) ||
+                    lowerReply.includes(d.brand.toLowerCase())
+                );
+
+                if (foundDrug) {
+                    onResultsFound({
+                        medicines: [{
+                            name: foundDrug.brand,
+                            dosage: foundDrug.dosages[0],
+                            explanation: foundDrug.usage,
+                            purpose: foundDrug.usage,
+                            dietaryPlan: foundDrug.diet,
+                            homeRemedies: foundDrug.home_remedies,
+                            sideEffects: foundDrug.restrictions,
+                            isLiveUpdate: true // Flag to indicate this came from chat
+                        }]
+                    });
+                }
+            }
         } catch (err) {
             setMessages((prev) => [...prev, { role: "bot", content: "Sorry, I encountered an error. Please try again." }]);
         } finally {
@@ -110,8 +138,8 @@ export default function ChatBot({ onResultsFound }: { onResultsFound?: (data: an
                         </div>
                         <div className={`flex flex-col space-y-2 max-w-[75%] ${msg.role === "user" ? "items-end" : ""}`}>
                             <div className={`p-5 rounded-3xl shadow-sm border ${msg.role === "user"
-                                    ? "bg-zinc-900 text-white border-zinc-800 rounded-tr-none"
-                                    : "bg-white text-zinc-700 border-zinc-100 rounded-tl-none font-medium leading-relaxed"
+                                ? "bg-zinc-900 text-white border-zinc-800 rounded-tr-none"
+                                : "bg-white text-zinc-700 border-zinc-100 rounded-tl-none font-medium leading-relaxed"
                                 }`}>
                                 {msg.content}
                             </div>

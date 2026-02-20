@@ -2,3 +2,6 @@ streamlit
 google-generativeai
 python-dotenv
 pillow
+opencv-python
+fuzzywuzzy
+python-Levenshtein

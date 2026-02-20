@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { prisma } from "@/lib/prisma";
-import bcrypt from "bcrypt";
+import { getPrisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 import { sendEmail } from "@/lib/email";
 
 export const authOptions = {
@@ -17,6 +17,7 @@ export const authOptions = {
                     throw new Error("Missing credentials");
                 }
 
+                const prisma = await getPrisma();
                 const user = await prisma.user.findFirst({
                     where: {
                         OR: [
@@ -113,9 +114,9 @@ export const authOptions = {
     session: {
         strategy: "jwt" as const,
     },
-    secret: process.env.NEXTAUTH_SECRET || "fallback_secret_for_dev",
+    secret: process.env.NEXTAUTH_SECRET || "pYn8r7Xm6L2q5W4z3v1u0t9s8r7q6p5o",
+    debug: true,
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };

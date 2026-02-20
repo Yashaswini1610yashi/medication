@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { prisma } from "@/lib/prisma";
+import { getPrisma } from "@/lib/prisma";
 
 export async function PUT(req: Request) {
     try {
@@ -12,6 +12,7 @@ export async function PUT(req: Request) {
 
         const { age, medicalHistory, doctorName, doctorPhone, doctorEmail } = await req.json();
 
+        const prisma = await getPrisma();
         const user = await prisma.user.update({
             where: { id: session.user.id },
             data: {
@@ -37,6 +38,7 @@ export async function GET(req: Request) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
+        const prisma = await getPrisma();
         const user = await prisma.user.findUnique({
             where: { id: session.user.id },
             select: {

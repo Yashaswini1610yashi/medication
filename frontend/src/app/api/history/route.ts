@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { prisma } from "@/lib/prisma";
+import { getPrisma } from "@/lib/prisma";
 
 export async function GET() {
     try {
@@ -11,12 +11,13 @@ export async function GET() {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
+        const prisma = await getPrisma();
         const prescriptions = await prisma.prescription.findMany({
             where: { userId: session.user.id },
             orderBy: { createdAt: "desc" },
         });
 
-        const parsedHistory = prescriptions.map((p) => ({
+        const parsedHistory = prescriptions.map((p: any) => ({
             id: p.id,
             createdAt: p.createdAt,
             ...JSON.parse(p.data),

@@ -23,6 +23,7 @@ export default function Home() {
   const [showSymptomChecker, setShowSymptomChecker] = useState(false);
   const [showDietPlan, setShowDietPlan] = useState(false);
   const [showHealthArticles, setShowHealthArticles] = useState(false);
+  const [activeMedication, setActiveMedication] = useState<any>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -90,7 +91,12 @@ export default function Home() {
             >
               {/* Central Chat Column - Now Full Width */}
               <div className="flex-1 flex flex-col h-full border-r border-zinc-100">
-                <ChatBot onResultsFound={setData} />
+                <ChatBot onResultsFound={(res) => {
+                  setData(res);
+                  if (res.medicines && res.medicines.length > 0) {
+                    setActiveMedication(res.medicines[0]);
+                  }
+                }} />
               </div>
             </motion.div>
           )}
@@ -334,6 +340,7 @@ export default function Home() {
         onSymptomClick={() => setShowSymptomChecker(true)}
         onDietClick={() => setShowDietPlan(true)}
         onArticleClick={() => setShowHealthArticles(true)}
+        activeMedication={activeMedication}
       />
 
       {/* Full Page Symptom Checker Modal */}

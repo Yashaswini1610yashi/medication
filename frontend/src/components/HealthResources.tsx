@@ -1,9 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Pill, Activity, Apple, FileText, ChevronRight, ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Pill, Activity, Apple, FileText, ChevronRight, ExternalLink, Sparkles, Info, ShieldCheck, AlertCircle } from "lucide-react";
 
-export default function HealthResources({ onDrugInfoClick, onEmergencyClick, onSymptomClick, onDietClick, onArticleClick }: { onDrugInfoClick?: () => void, onEmergencyClick?: () => void, onSymptomClick?: () => void, onDietClick?: () => void, onArticleClick?: () => void }) {
+export default function HealthResources({
+    onDrugInfoClick,
+    onEmergencyClick,
+    onSymptomClick,
+    onDietClick,
+    onArticleClick,
+    activeMedication
+}: {
+    onDrugInfoClick?: () => void,
+    onEmergencyClick?: () => void,
+    onSymptomClick?: () => void,
+    onDietClick?: () => void,
+    onArticleClick?: () => void,
+    activeMedication?: any
+}) {
     const resources = [
         { title: "Drug Information", desc: "Detailed breakdown of 10k+ meds", icon: Pill, color: "bg-blue-50 text-blue-600", onClick: onDrugInfoClick },
         { title: "Symptom Checker", desc: "AI-driven wellness analysis", icon: Activity, color: "bg-purple-50 text-purple-600", onClick: onSymptomClick },
@@ -13,6 +27,72 @@ export default function HealthResources({ onDrugInfoClick, onEmergencyClick, onS
 
     return (
         <aside className="w-80 bg-zinc-50 border-l border-zinc-100 p-8 space-y-10 h-full sticky top-0 overflow-y-auto hidden xl:block">
+            {/* Live Medical Analysis Area */}
+            <AnimatePresence>
+                {activeMedication && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                        className="p-6 bg-white rounded-[2.5rem] border-2 border-blue-500/10 shadow-xl shadow-blue-900/5 space-y-6 relative overflow-hidden group"
+                    >
+                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                            <Sparkles className="w-12 h-12 text-blue-500 animate-pulse" />
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-100 ring-4 ring-blue-50">
+                                <Pill className="w-5 h-5 text-white" />
+                            </div>
+                            <div>
+                                <h3 className="text-sm font-black text-zinc-900 uppercase tracking-tighter">Live Analysis</h3>
+                                <div className="flex items-center gap-1">
+                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-blink" />
+                                    <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Bot Sync Active</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-4 pt-2">
+                            <div className="space-y-1">
+                                <h4 className="text-xl font-black text-zinc-900">{activeMedication.name}</h4>
+                                <p className="text-[10px] text-blue-500 font-bold uppercase tracking-widest leading-none">{activeMedication.purpose}</p>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-3">
+                                <div className="p-4 bg-zinc-50 rounded-2xl border border-zinc-100 space-y-2 group-hover:bg-blue-50/30 transition-colors">
+                                    <div className="flex items-center gap-2 text-zinc-400">
+                                        <Apple className="w-3.5 h-3.5" />
+                                        <span className="text-[9px] font-black uppercase tracking-widest">Dietary Advice</span>
+                                    </div>
+                                    <p className="text-[11px] font-bold text-zinc-700 leading-relaxed italic">
+                                        "{activeMedication.dietaryPlan || "No specific dietary restrictions."}"
+                                    </p>
+                                </div>
+
+                                <div className="p-4 bg-zinc-50 rounded-2xl border border-zinc-100 space-y-2 group-hover:bg-amber-50/30 transition-colors">
+                                    <div className="flex items-center gap-2 text-zinc-400">
+                                        <ShieldCheck className="w-3.5 h-3.5" />
+                                        <span className="text-[9px] font-black uppercase tracking-widest">Home Remedy</span>
+                                    </div>
+                                    <p className="text-[11px] font-bold text-zinc-700 leading-relaxed italic">
+                                        "{activeMedication.homeRemedies || "Gentle rest recommended."}"
+                                    </p>
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={onDrugInfoClick}
+                                className="w-full py-3 bg-zinc-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 transition-all flex items-center justify-center gap-2"
+                            >
+                                Full Analysis Report
+                                <ChevronRight className="w-3 h-3" />
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <div>
                 <h3 className="text-sm font-black text-zinc-900 uppercase tracking-widest mb-6">Health Resources</h3>
                 <div className="space-y-4">

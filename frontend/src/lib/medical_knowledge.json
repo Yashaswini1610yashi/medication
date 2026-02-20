@@ -24,7 +24,8 @@
         "syr": "Syrup",
         "oint": "Ointment",
         "sol": "Solution",
-        "ud": "As directed"
+        "ud": "As directed",
+        "qsad": "Add sufficient quantity to make"
     },
     "drug_database": [
         {
@@ -37,7 +38,9 @@
                 "40mg",
                 "80mg"
             ],
-            "restrictions": "Avoid Grapefruit"
+            "restrictions": "Avoid Grapefruit",
+            "diet": "Low-fat, high-fiber, avoid grapefruit juice.",
+            "home_remedies": "Daily exercise, Omega-3 (Consult doctor)."
         },
         {
             "name": "Levothyroxine",
@@ -49,7 +52,9 @@
                 "75mcg",
                 "100mcg"
             ],
-            "restrictions": "Take on empty stomach"
+            "restrictions": "Take on empty stomach",
+            "diet": "Avoid soy, walnuts, and high-fiber foods within 4 hours.",
+            "home_remedies": "Consistent sleep schedule, stress management."
         },
         {
             "name": "Lisinopril",
@@ -61,7 +66,9 @@
                 "20mg",
                 "40mg"
             ],
-            "restrictions": "Monitor Potassium"
+            "restrictions": "Monitor Potassium",
+            "diet": "Low sodium (DASH diet), avoid potassium-rich salt substitutes.",
+            "home_remedies": "Daily meditation, Hibiscus tea (Consult doctor)."
         },
         {
             "name": "Metformin",
@@ -72,7 +79,9 @@
                 "850mg",
                 "1000mg"
             ],
-            "restrictions": "Take with meals"
+            "restrictions": "Take with meals",
+            "diet": "Complex carbs only, high fiber, limit sugary fruits.",
+            "home_remedies": "Apple Cider Vinegar (diluted), Cinnamon (standardized)."
         },
         {
             "name": "Amlodipine",
@@ -83,7 +92,9 @@
                 "5mg",
                 "10mg"
             ],
-            "restrictions": "Avoid alcohol"
+            "restrictions": "Avoid alcohol",
+            "diet": "Low salt, limit caffeine.",
+            "home_remedies": "Magnesium supplements (Consult doctor), Potassium alignment."
         },
         {
             "name": "Metoprolol",
@@ -94,7 +105,9 @@
                 "50mg",
                 "100mg"
             ],
-            "restrictions": "Don't stop suddenly"
+            "restrictions": "Don't stop suddenly",
+            "diet": "Low sodium, limit alcohol.",
+            "home_remedies": "Breathing exercises, CoQ10 (Consult doctor)."
         },
         {
             "name": "Albuterol",
@@ -103,7 +116,9 @@
             "dosages": [
                 "90mcg inhaler"
             ],
-            "restrictions": "Limit Caffeine"
+            "restrictions": "Limit Caffeine",
+            "diet": "Avoid dairy if phlegm is an issue, stay hydrated.",
+            "home_remedies": "Steam inhalation, Ginger tea for inflammation."
         },
         {
             "name": "Omeprazole",
@@ -114,7 +129,9 @@
                 "20mg",
                 "40mg"
             ],
-            "restrictions": "Long-term bone risk"
+            "restrictions": "Long-term bone risk",
+            "diet": "Smaller meals, avoid spicy/acidic foods, no late-night snacks.",
+            "home_remedies": "Raising head of bed, Aloevera juice (Consult doctor)."
         },
         {
             "name": "Losartan",
@@ -125,7 +142,9 @@
                 "50mg",
                 "100mg"
             ],
-            "restrictions": "Pregnancy Category D"
+            "restrictions": "Pregnancy Category D",
+            "diet": "Low sodium, avoid potassium supplements.",
+            "home_remedies": "Yoga, walking."
         },
         {
             "name": "Sertraline",
@@ -136,7 +155,9 @@
                 "50mg",
                 "100mg"
             ],
-            "restrictions": "Serotonin Syndrome risk"
+            "restrictions": "Serotonin Syndrome risk",
+            "diet": "Limit alcohol and caffeine.",
+            "home_remedies": "Daily sunlight, regular exercise, Fish oils (Consult doctor)."
         },
         {
             "name": "Gabapentin",
@@ -148,39 +169,9 @@
                 "400mg",
                 "600mg"
             ],
-            "restrictions": "Drowsiness"
-        },
-        {
-            "name": "Hydrochlorothiazide",
-            "brand": "Microzide",
-            "usage": "Water Retention",
-            "dosages": [
-                "12.5mg",
-                "25mg",
-                "50mg"
-            ],
-            "restrictions": "Sun sensitivity"
-        },
-        {
-            "name": "Sertraline",
-            "brand": "Zoloft",
-            "usage": "Depression",
-            "dosages": [
-                "50mg",
-                "100mg"
-            ],
-            "restrictions": "Avoid Alcohol"
-        },
-        {
-            "name": "Simvastatin",
-            "brand": "Zocor",
-            "usage": "Cholesterol",
-            "dosages": [
-                "10mg",
-                "20mg",
-                "40mg"
-            ],
-            "restrictions": "Take in evening"
+            "restrictions": "Drowsiness",
+            "diet": "Stay hydrated, limit alcohol.",
+            "home_remedies": "B-complex vitamins (Consult doctor), gentle stretching."
         },
         {
             "name": "Amoxicillin",
@@ -191,7 +182,9 @@
                 "500mg",
                 "875mg"
             ],
-            "restrictions": "Complete full course"
+            "restrictions": "Complete full course",
+            "diet": "Probiotic-rich (curd/yogurt) to restore gut flora.",
+            "home_remedies": "Warm salt water gargles for throat, Vitamin C."
         },
         {
             "name": "Azithromycin",
@@ -201,107 +194,9 @@
                 "250mg",
                 "500mg"
             ],
-            "restrictions": "Heart rhythm monitoring"
-        },
-        {
-            "name": "Furosemide",
-            "brand": "Lasix",
-            "usage": "Water Retention",
-            "dosages": [
-                "20mg",
-                "40mg",
-                "80mg"
-            ],
-            "restrictions": "Potassium depletion"
-        },
-        {
-            "name": "Pantoprazole",
-            "brand": "Protonix",
-            "usage": "Acid Reflux",
-            "dosages": [
-                "20mg",
-                "40mg"
-            ],
-            "restrictions": "Long-term use monitoring"
-        },
-        {
-            "name": "Escitalopram",
-            "brand": "Lexapro",
-            "usage": "Anxiety",
-            "dosages": [
-                "5mg",
-                "10mg",
-                "20mg"
-            ],
-            "restrictions": "Suicidal thought monitoring"
-        },
-        {
-            "name": "Fluoxetine",
-            "brand": "Prozac",
-            "usage": "Depression",
-            "dosages": [
-                "10mg",
-                "20mg",
-                "40mg"
-            ],
-            "restrictions": "Washout period required"
-        },
-        {
-            "name": "Rosuvastatin",
-            "brand": "Crestor",
-            "usage": "Cholesterol",
-            "dosages": [
-                "5mg",
-                "10mg",
-                "20mg",
-                "40mg"
-            ],
-            "restrictions": "Asian descent dose adjustment"
-        },
-        {
-            "name": "Bupropion",
-            "brand": "Wellbutrin",
-            "usage": "Depression",
-            "dosages": [
-                "75mg",
-                "150mg",
-                "300mg"
-            ],
-            "restrictions": "Seizure risk"
-        },
-        {
-            "name": "Trazodone",
-            "brand": "Desyrel",
-            "usage": "Insomnia",
-            "dosages": [
-                "50mg",
-                "100mg",
-                "150mg"
-            ],
-            "restrictions": "Priapism risk"
-        },
-        {
-            "name": "Alprazolam",
-            "brand": "Xanax",
-            "usage": "Anxiety",
-            "dosages": [
-                "0.25mg",
-                "0.5mg",
-                "1mg",
-                "2mg"
-            ],
-            "restrictions": "Highly addictive"
-        },
-        {
-            "name": "Clonazepam",
-            "brand": "Klonopin",
-            "usage": "Seizures/Panic",
-            "dosages": [
-                "0.5mg",
-                "1mg",
-                "2mg"
-            ],
-            "restrictions": "Taper slowly"
+            "restrictions": "Heart rhythm monitoring",
+            "diet": "Light meals, avoid heavy oily food during infection.",
+            "home_remedies": "Ginger-garlic water, hydration."
         },
         {
             "name": "Ibuprofen",
@@ -313,38 +208,9 @@
                 "600mg",
                 "800mg"
             ],
-            "restrictions": "Stomach bleeding risk"
-        },
-        {
-            "name": "Naproxen",
-            "brand": "Aleve",
-            "usage": "Pain",
-            "dosages": [
-                "220mg",
-                "250mg",
-                "500mg"
-            ],
-            "restrictions": "Kidney risk"
-        },
-        {
-            "name": "Meloxicam",
-            "brand": "Mobic",
-            "usage": "Arthritis",
-            "dosages": [
-                "7.5mg",
-                "15mg"
-            ],
-            "restrictions": "NSAID risks"
-        },
-        {
-            "name": "Tramadol",
-            "brand": "Ultram",
-            "usage": "Moderate Pain",
-            "dosages": [
-                "50mg",
-                "100mg"
-            ],
-            "restrictions": "Seizure/Breathing risk"
+            "restrictions": "Stomach bleeding risk",
+            "diet": "Always take with food/milk.",
+            "home_remedies": "Turmeric milk (anti-inflammatory), Cold compress."
         },
         {
             "name": "Acetaminophen",
@@ -355,164 +221,126 @@
                 "500mg",
                 "650mg"
             ],
-            "restrictions": "Liver toxicity"
+            "restrictions": "Liver toxicity",
+            "diet": "Avoid alcohol completely while taking.",
+            "home_remedies": "Tepid water sponging for fever."
         },
         {
-            "name": "Montelukast",
-            "brand": "Singulair",
-            "usage": "Asthma/Allergy",
+            "name": "Paracetamol",
+            "brand": "Dolo",
+            "usage": "Pain/Fever",
             "dosages": [
-                "4mg",
-                "5mg",
-                "10mg"
-            ],
-            "restrictions": "Neuropsychiatric risk"
-        },
-        {
-            "name": "Fluticasone",
-            "brand": "Flonase",
-            "usage": "Allergies",
-            "dosages": [
-                "50mcg spray"
-            ],
-            "restrictions": "Nasal irritation"
-        },
-        {
-            "name": "Ciprofloxacin",
-            "brand": "Cipro",
-            "usage": "Infection",
-            "dosages": [
-                "250mg",
                 "500mg",
-                "750mg"
+                "650mg"
             ],
-            "restrictions": "Tendon rupture risk"
+            "restrictions": "Liver risk at high doses",
+            "diet": "Stay hydrated, avoid alcohol.",
+            "home_remedies": "Rest, cool damp cloth on forehead."
         },
         {
-            "name": "Doxycycline",
-            "brand": "Vibramycin",
-            "usage": "Infection",
+            "name": "Amylmetacresol + Dextrometacresol",
+            "brand": "Cofsils",
+            "usage": "Sore Throat/Cough",
+            "dosages": [
+                "Lozenge"
+            ],
+            "restrictions": "Not for children under 6",
+            "diet": "Warm fluids only, no cold water/ice cream.",
+            "home_remedies": "Honey and ginger, steam."
+        },
+        {
+            "name": "Dichlorobenzyl Alcohol",
+            "brand": "Strepsils",
+            "usage": "Sore Throat",
+            "dosages": [
+                "Lozenge"
+            ],
+            "restrictions": "Avoid in small children",
+            "diet": "Warm herbal teas, avoid spice.",
+            "home_remedies": "Saltwater gargle."
+        },
+        {
+            "name": "Nimesulide + Paracetamol",
+            "brand": "Nimcet",
+            "usage": "Pain/Fever/Inflammation",
+            "dosages": [
+                "100mg+500mg"
+            ],
+            "restrictions": "Avoid in children under 12",
+            "diet": "Take with light snacks or milk, stay hydrated.",
+            "home_remedies": "Turmeric-honey paste, adequate rest."
+        },
+        {
+            "name": "Omeprazole + Paracetamol",
+            "brand": "Omes P",
+            "usage": "Pain with Acid Reflux",
+            "dosages": [
+                "20mg+500mg"
+            ],
+            "restrictions": "Take before meals for best effect",
+            "diet": "Avoid carbonated drinks, small frequent meals.",
+            "home_remedies": "Chamomile tea, chewing fennel seeds (Saunf)."
+        },
+        {
+            "name": "Vapor Rub",
+            "brand": "Vicks",
+            "usage": "Congestion/Cold",
+            "dosages": [
+                "Topical"
+            ],
+            "restrictions": "External use only",
+            "diet": "Hot soups, avoid dairy if mucus is thick.",
+            "home_remedies": "Inhaling steam with carom seeds (Ajwain)."
+        },
+        {
+            "name": "DPP-4 Inhibitors (Sitagliptin/Vildagliptin)",
+            "brand": "Januvia/Galvus",
+            "usage": "Type 2 Diabetes",
             "dosages": [
                 "50mg",
                 "100mg"
             ],
-            "restrictions": "Sun sensitivity, Teeth staining"
+            "restrictions": "Monitor Kidney Function",
+            "diet": "Consistent carb intake, focus on pulses and green veg.",
+            "home_remedies": "Fenugreek water (Methi water), daily 30-min walk."
         },
         {
-            "name": "Clopidogrel",
-            "brand": "Plavix",
-            "usage": "Blood Thinner",
+            "name": "Aspirin",
+            "brand": "Ecotrin",
+            "usage": "Pain/Heart Protection",
             "dosages": [
                 "75mg",
-                "300mg"
+                "81mg",
+                "325mg"
             ],
-            "restrictions": "Bleeding risk"
+            "restrictions": "Risk of bleeding",
+            "diet": "Avoid excessive garlic or ginger supplements (blood thinning).",
+            "home_remedies": "Rest, keep head elevated."
         },
         {
-            "name": "Apixaban",
-            "brand": "Eliquis",
-            "usage": "Blood Thinner",
+            "name": "Aluminum Hydroxide",
+            "brand": "Amphogel",
+            "usage": "Antacid/Acid Reflux",
             "dosages": [
-                "2.5mg",
-                "5mg"
+                "320mg",
+                "600mg",
+                "Liquid"
             ],
-            "restrictions": "Avoid NSAIDs"
+            "restrictions": "Avoid in severe kidney disease",
+            "diet": "Limit citric acid (orange juice), take 1 hour after meals.",
+            "home_remedies": "Cold milk, smaller meals, avoid sleeping immediately after eating."
         },
         {
-            "name": "Warfarin",
-            "brand": "Coumadin",
-            "usage": "Blood Thinner",
+            "name": "Tincture Belladonna",
+            "brand": "Belladonna",
+            "usage": "Gastrointestinal spasms/Cramps",
             "dosages": [
-                "1mg",
-                "2mg",
-                "5mg",
-                "10mg"
+                "0.3ml",
+                "Liquid"
             ],
-            "restrictions": "Vitamin K monitoring"
-        },
-        {
-            "name": "Prednisone",
-            "brand": "Deltasone",
-            "usage": "Inflammation",
-            "dosages": [
-                "1mg",
-                "5mg",
-                "10mg",
-                "20mg",
-                "50mg"
-            ],
-            "restrictions": "Immune suppression, Bone loss"
-        },
-        {
-            "name": "Cefdinir",
-            "brand": "Omnicef",
-            "usage": "Infection",
-            "dosages": [
-                "300mg"
-            ],
-            "restrictions": "Red stool (benign)"
-        },
-        {
-            "name": "Cephalexin",
-            "brand": "Keflex",
-            "usage": "Infection",
-            "dosages": [
-                "250mg",
-                "500mg"
-            ],
-            "restrictions": "Stomach upset"
-        },
-        {
-            "name": "Azithromycin",
-            "brand": "Zithromax",
-            "usage": "Infection",
-            "dosages": [
-                "250mg",
-                "500mg"
-            ],
-            "restrictions": "Heart rhythm monitoring"
-        },
-        {
-            "name": "Paracetamol",
-            "brand": "Calpol",
-            "usage": "Pain/Fever",
-            "dosages": [
-                "125mg/5ml",
-                "250mg/5ml",
-                "500mg",
-                "650mg"
-            ],
-            "restrictions": "Liver risk at high doses"
-        },
-        {
-            "name": "Levosalbutamol",
-            "brand": "Levolin",
-            "usage": "Asthma/Breathing",
-            "dosages": [
-                "0.63mg",
-                "1.25mg",
-                "1mg/5ml"
-            ],
-            "restrictions": "May cause tremors"
-        },
-        {
-            "name": "Mefenamic Acid",
-            "brand": "Meftal-P",
-            "usage": "Pain/Fever",
-            "dosages": [
-                "100mg/5ml",
-                "500mg"
-            ],
-            "restrictions": "Avoid in asthma or stomach ulcers"
-        },
-        {
-            "name": "Chlorpheniramine + Phenylephrine",
-            "brand": "Delcon",
-            "usage": "Cough/Cold/Allergy",
-            "dosages": [
-                "2mg+5mg/5ml"
-            ],
-            "restrictions": "May cause drowsiness"
+            "restrictions": "May cause dry mouth/blurred vision",
+            "diet": "High fiber to avoid constipation (side effect).",
+            "home_remedies": "Sucking on sugar-free ice chips for dry mouth."
         }
     ],
     "handwriting_logic": {
@@ -521,8 +349,14 @@
             "l_vs_i": "'l' is taller, 'i' often has a detached dot or is just a shorter vertical stroke.",
             "o_vs_a": "'a' has a vertical tail, 'o' is a closed loop often with a connecting top whisk.",
             "t_vs_plus": "Horizontal crossbar position determines if it's a letter or a math symbol.",
-            "r_vs_v": "Check the sharp bottom versus the rounded stroke."
+            "r_vs_v": "Check the sharp bottom versus the rounded stroke.",
+            "slurred_cursive": {
+                "C_as_O": "Doctors often start 'C' with a loop that looks like an 'O'. If dosage is lozenge, it is likely 'Cofsils'.",
+                "f_as_ squiggle": "The letter 'f' in the middle of a word is often just a tall vertical spike with a tiny crossbar.",
+                "s_as_wave": "The trailing 's' is often a flat horizontal line or a tiny wave.",
+                "D_as_B": "Caps 'D' in 'Dolo' can look like a 'B' if the doctor loops the top. Look for '650' to confirm 'Dolo'."
+            }
         },
-        "pharmacist_elimination": "If name is partial, cross-reference against the drug database for usage and common prefix/suffix like -cillin, -statin, -prazole."
+        "pharmacist_elimination": "1. Extract raw letters (e.g., 'C...f...s'). 2. Match pattern 'C*f*s*' against brand names. 3. Cross-reference usage (Cough) and form (Lozenges) to confirm 'Cofsils'."
     }
 }

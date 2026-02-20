@@ -1,5 +1,7 @@
-import { Bell, Clock, Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Bell, Clock, Calendar, BellOff, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { requestNotificationPermission, setupMedicationReminders } from "@/lib/notifications";
 
 interface Medicine {
     name: string;
@@ -12,6 +14,35 @@ interface DigitalScheduleProps {
 }
 
 export default function DigitalSchedule({ medicines }: DigitalScheduleProps) {
+    const [remindersEnabled, setRemindersEnabled] = useState(false);
+
+    useEffect(() => {
+        const saved = localStorage.getItem("medication_reminders_enabled");
+        if (saved === "true") {
+            setRemindersEnabled(true);
+            setupMedicationReminders(medicines);
+        }
+    }, [medicines]);
+
+    const toggleReminders = async () => {
+        if (!remindersEnabled) {
+            const granted = await requestNotificationPermission();
+            if (granted) {
+                setRemindersEnabled(true);
+                localStorage.setItem("medication_reminders_enabled", "true");
+                setupMedicationReminders(medicines);
+                alert("Medication Reminders Enabled! You will receive a browser notification for each dose.");
+            } else {
+                alert("Please enable notification permissions in your browser to use this feature.");
+            }
+        } else {
+            setRemindersEnabled(false);
+            localStorage.setItem("medication_reminders_enabled", "false");
+            // Note: In a full app, we'd clear the intervals/timeouts here
+            alert("Reminders disabled.");
+        }
+    };
+
     // Flatten and sort the schedule
     const fullSchedule = medicines.flatMap(med => {
         const scheduleArray = Array.isArray(med.schedule)
@@ -34,9 +65,15 @@ export default function DigitalSchedule({ medicines }: DigitalScheduleProps) {
                     <Calendar className="w-6 h-6 text-indigo-600" />
                     <h2 className="text-2xl font-bold text-zinc-900">Digital Schedule</h2>
                 </div>
-                <button className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-2xl hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200">
-                    <Bell className="w-4 h-4" />
-                    <span className="font-medium text-sm">Set Reminders</span>
+                <button
+                    onClick={toggleReminders}
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-2xl transition-all shadow-lg font-bold text-sm ${remindersEnabled
+                            ? 'bg-green-600 text-white shadow-green-200'
+                            : 'bg-indigo-600 text-white shadow-indigo-200'
+                        }`}
+                >
+                    {remindersEnabled ? <ShieldCheck className="w-4 h-4" /> : <Bell className="w-4 h-4" />}
+                    {remindersEnabled ? 'Reminders Active' : 'Set Reminders'}
                 </button>
             </div>
 
