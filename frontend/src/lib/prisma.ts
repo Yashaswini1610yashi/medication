@@ -9,7 +9,7 @@ export const getPrisma = async () => {
         globalForPrisma.prisma = new PrismaClient({
             datasources: {
                 db: {
-                    url: "file:C:/Users/yy291/.gemini/antigravity/scratch/med-scan/frontend/prisma/dev.db",
+                    url: process.env.DATABASE_URL || "file:./prisma/dev.db",
                 },
             },
             log: ["error"],
