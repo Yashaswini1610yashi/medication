@@ -14,6 +14,7 @@ import { RefreshCcw, Heart, History, User as UserIcon, ArrowRight, Pill, Activit
 export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [guestName, setGuestName] = useState("Patient");
   const [activeTab, setActiveTab] = useState<"scan" | "history" | "profile" | "settings">("scan");
   const [data, setData] = useState<{ medicines: any[] } | null>(null);
   const [history, setHistory] = useState<any[]>([]);
@@ -26,13 +27,17 @@ export default function Home() {
   const [activeMedication, setActiveMedication] = useState<any>(null);
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    } else if (status === "authenticated") {
+    if (status === "authenticated") {
       fetchHistory();
       fetchProfile();
+      if (session?.user?.name) setGuestName(session.user.name);
+    } else {
+      const savedProfile = localStorage.getItem("guest_profile");
+      const savedName = localStorage.getItem("guest_name");
+      if (savedProfile) setProfileData(JSON.parse(savedProfile));
+      if (savedName) setGuestName(savedName);
     }
-  }, [status, router]);
+  }, [status, session]);
 
   const fetchHistory = async () => {
     try {
@@ -77,7 +82,7 @@ export default function Home() {
 
   return (
     <div className="flex h-screen bg-[#FAFBFF] font-sans selection:bg-blue-100 selection:text-blue-900 relative">
-      <DashboardSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <DashboardSidebar activeTab={activeTab} setActiveTab={setActiveTab} guestName={guestName} />
 
       <main className="flex-1 flex flex-col min-w-0">
         <AnimatePresence mode="wait">
@@ -174,12 +179,24 @@ export default function Home() {
                     </div>
                   </div>
                   <div>
-                    <h2 className="text-3xl font-black text-zinc-900 tracking-tight">{session?.user?.name}</h2>
-                    <p className="text-zinc-400 font-bold uppercase tracking-widest text-xs mt-1">{session?.user?.email}</p>
+                    <h2 className="text-3xl font-black text-zinc-900 tracking-tight">{guestName}</h2>
+                    <p className="text-zinc-400 font-bold uppercase tracking-widest text-xs mt-1">{session?.user?.email || "Guest Patient"}</p>
                   </div>
                 </div>
 
                 <div className="bg-white p-10 rounded-[3rem] border border-zinc-100 shadow-xl shadow-blue-900/5 space-y-10">
+                  {/* Manual Name Entry */}
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400 ml-1">Full Name</label>
+                    <input
+                      type="text"
+                      placeholder="Enter Patient Name"
+                      className="w-full h-14 px-6 bg-zinc-50 border-none rounded-2xl text-sm font-bold focus:ring-4 focus:ring-blue-500/10 transition-all"
+                      value={guestName}
+                      onChange={(e) => setGuestName(e.target.value)}
+                    />
+                  </div>
+
                   <div className="space-y-6">
                     <div className="flex items-center gap-3">
                       <Activity className="w-5 h-5 text-blue-600" />
@@ -264,12 +281,17 @@ export default function Home() {
 
                   <button
                     onClick={async () => {
-                      await fetch("/api/user/profile", {
-                        method: "PUT",
-                        body: JSON.stringify(profileData),
-                        headers: { "Content-Type": "application/json" }
-                      });
-                      alert("Health Profile Synced with MediBot AI!");
+                      if (status === "authenticated") {
+                        await fetch("/api/user/profile", {
+                          method: "PUT",
+                          body: JSON.stringify(profileData),
+                          headers: { "Content-Type": "application/json" }
+                        });
+                      } else {
+                        localStorage.setItem("guest_profile", JSON.stringify(profileData));
+                        localStorage.setItem("guest_name", guestName);
+                      }
+                      alert("Health Profile Synced Locally!");
                     }}
                     className="w-full h-16 bg-blue-600 text-white rounded-[1.5rem] font-bold shadow-xl shadow-blue-200 hover:bg-blue-700 hover:scale-[1.01] active:scale-[0.99] transition-all"
                   >

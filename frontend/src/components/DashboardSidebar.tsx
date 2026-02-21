@@ -4,7 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 import { User, LogOut, MessageSquare, History, Award, Settings } from "lucide-react";
 
-export default function DashboardSidebar({ activeTab, setActiveTab }: { activeTab: string, setActiveTab: (tab: any) => void }) {
+export default function DashboardSidebar({ activeTab, setActiveTab, guestName }: { activeTab: string, setActiveTab: (tab: any) => void, guestName: string }) {
     const { data: session } = useSession();
 
     const navItems = [
@@ -26,7 +26,7 @@ export default function DashboardSidebar({ activeTab, setActiveTab }: { activeTa
                         <div className="absolute -right-1 bottom-1 w-6 h-6 bg-green-500 border-4 border-white rounded-full" />
                     </div>
                     <div>
-                        <h3 className="font-bold text-zinc-900">{session?.user?.name || "Patient"}</h3>
+                        <h3 className="font-bold text-zinc-900">{guestName}</h3>
                         <div className="flex items-center justify-center gap-1.5 mt-1">
                             <Award className="w-3.5 h-3.5 text-blue-500" />
                             <span className="text-[10px] font-bold uppercase tracking-widest text-blue-500 bg-blue-50 px-2 py-0.5 rounded-full">
@@ -45,8 +45,8 @@ export default function DashboardSidebar({ activeTab, setActiveTab }: { activeTa
                         key={item.id}
                         onClick={() => setActiveTab(item.id)}
                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl transition-all ${activeTab === item.id
-                                ? "bg-blue-600 text-white shadow-lg shadow-blue-100"
-                                : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900"
+                            ? "bg-blue-600 text-white shadow-lg shadow-blue-100"
+                            : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900"
                             }`}
                     >
                         <item.icon className="w-5 h-5" />
@@ -58,11 +58,18 @@ export default function DashboardSidebar({ activeTab, setActiveTab }: { activeTa
             {/* Footer Actions */}
             <div className="p-6 mt-auto">
                 <button
-                    onClick={() => signOut()}
+                    onClick={() => {
+                        if (session) {
+                            signOut();
+                        } else {
+                            localStorage.clear();
+                            window.location.reload();
+                        }
+                    }}
                     className="w-full flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-red-600 hover:bg-red-50 rounded-2xl transition-all transition-colors group"
                 >
                     <LogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                    <span className="text-sm font-semibold">Sign Out</span>
+                    <span className="text-sm font-semibold">{session ? "Sign Out" : "Reset Session"}</span>
                 </button>
             </div>
         </aside>
