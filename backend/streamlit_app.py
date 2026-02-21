@@ -139,18 +139,25 @@ elif selected == "Prescription Scanner":
         if st.button("Analyze Image"):
             with st.spinner("Analyzing with 100% Accuracy Goal..."):
                 import json
+                kb = {} # Initialize to avoid NameError
                 try:
-                    kb_path = os.path.join("..", "frontend", "src", "lib", "medical_knowledge.json")
+                    # Robust path discovery for cloud/local environments
+                    script_dir = os.path.dirname(os.path.abspath(__file__))
+                    kb_path = os.path.join(script_dir, "..", "frontend", "src", "lib", "medical_knowledge.json")
+                    
                     if not os.path.exists(kb_path):
-                         kb_path = os.path.join("..", "src", "lib", "medical_knowledge.json") # Fallback
+                         # Fallback for alternative structures
+                         kb_path = os.path.join(script_dir, "medical_knowledge.json")
                          
-                    with open(kb_path, "r") as f:
-                        kb = json.load(f)
-                    # Correcting keys to match the actual JSON structure
+                    if os.path.exists(kb_path):
+                        with open(kb_path, "r") as f:
+                            kb = json.load(f)
+                    
+                    # Safe extraction with defaults
                     drugs_list = [d['name'] for d in kb.get('drug_database', [])]
                     kb_context = f"\nMEDICAL KNOWLEDGE BASE:\n- DRUGS: {', '.join(drugs_list)}\n- ABBREVIATIONS: {json.dumps(kb.get('abbreviations', {}))}"
                 except Exception as e:
-                    kb_context = f"\n(Knowledge Base Error: {str(e)})"
+                    kb_context = f"\n(Knowledge Base Context Warning: {str(e)})"
 
                 prompt = f"""
                 ACT AS: A Clinical Pharmacist & Senior Forensic Handwriting Analyst.
