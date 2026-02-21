@@ -1,6 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const apiKey = process.env.GOOGLE_API_KEY || "AIzaSyCSBygvGm4ePoU24wLFRpPPleseqqnGsXI";
+const apiKey = process.env.GOOGLE_API_KEY || "";
+if (!apiKey) {
+    console.error("CRITICAL: GOOGLE_API_KEY is not defined in environment variables.");
+}
 const genAI = new GoogleGenerativeAI(apiKey);
 
 export const modelNames = [

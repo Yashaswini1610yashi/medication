@@ -33,7 +33,7 @@ def preprocess_image_for_ocr(pil_image):
     return Image.fromarray(thresh)
 
 # Configure Google Gemini
-API_KEY = os.getenv("GOOGLE_API_KEY") or "AIzaSyCSBygvGm4ePoU24wLFRpPPleseqqnGsXI"
+API_KEY = st.secrets.get("GOOGLE_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
 if not API_KEY:
     st.error("Missing Google API Key. Please configure it in .env.local or Streamlit Secrets.")
