@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: med-scan-ai-hub
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run streamlit_app.py --server.port $PORT
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
